@@ -169,6 +169,8 @@ class NCS_RCA ():
         pass
         #self.tcp_cmd.send_cmd("sys abort;")
 
+
+#TODO: change the listening time to 1 second or less for all functions
     #start of custom defined methods
 
     def help(self):
@@ -181,7 +183,7 @@ class NCS_RCA ():
                 logging.info(line)
             else:
                 logging.info(line)
-                line = self.tcp_cmd.read_line(5)
+                line = self.tcp_cmd.read_line(1)
 
     def time(self):
         self.tcp_cmd.send_cmd("tim:end;")
@@ -193,11 +195,11 @@ class NCS_RCA ():
                 logging.info(line)
             else:
                 logging.info(line)
-                line = self.tcp_cmd.read_line(5)
+                line = self.tcp_cmd.read_line(1)
 
     #Load workspace on the control agent                
-    def workspace_load(self):
-        self.tcp_cmd.send_cmd("work;")
+    def workspace_load(self, filename):
+        self.tcp_cmd.send_cmd("work " + filename)
 
         line = "xxx"
         while (line != ""):
